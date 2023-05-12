@@ -21,10 +21,20 @@ private:
 
 	void LoadTexture(string& texturePath);
 
+	TextureManager();
 	~TextureManager();
 
+	TextureManager(TextureManager const&) = delete;
+	void operator=(TextureManager const&) = delete;
+
 public:
-	TextureManager();
+	static TextureManager& GetInstance()
+	{
+		static TextureManager instance;
+		return instance;
+	}
+
+
 
 	bool SelectNewTexture();
 

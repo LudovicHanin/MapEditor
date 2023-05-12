@@ -15,8 +15,6 @@ RectangleShape displayMap[450];
 
 int mapTxt[450];
 
-TextureManager textureManager;
-
 vector<RectangleShape*> textureLoaded;
 
 Texture* textureSelected;
@@ -138,10 +136,10 @@ void MouseInputHandler(Event event, RenderWindow& window)
 
 void CreateShapes()
 {
-	if (!textureManager.SelectNewTexture())
+	if (!TextureManager::GetInstance().SelectNewTexture())
 		return;
 
-	Texture* texturePtr = textureManager.GetTexture(capacityTexture);
+	Texture* texturePtr = TextureManager::GetInstance().GetTexture(capacityTexture);
 
 	int sizeX = texturePtr->getSize().x;
 	int sizeY = texturePtr->getSize().y;

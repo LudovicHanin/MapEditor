@@ -22,6 +22,8 @@ public:
 private:
 	string onButtonPressedEventName;
 
+	RectangleShape* buttonShape;
+
 	void OnButtonPressed();
 	//void OnButtonReleased();
 };
