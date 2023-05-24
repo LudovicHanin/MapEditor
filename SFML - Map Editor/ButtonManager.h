@@ -1,36 +1,28 @@
-#ifndef BUTTONMANAGER_H
-#define BUTTONMANAGER_H
+#ifndef BUTTONMANAGER
+#define BUTTONMANAGER
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <list>
+#include "MouseInputManager.h"
 #include "Button.h"
+#include <vector>
 
 using namespace std;
-using namespace sf;
 
-#endif // !BUTTONMANAGER_H
-
-
-
-class ButtonManager
+class ButtonManager : public Observer<>
 {
 public:
-	static ButtonManager& GetInstance()
-	{
-		static ButtonManager instance;
-		return instance;
-	}
+	ButtonManager(RenderWindow* gameWindow);
+	~ButtonManager();
 
-	void RegisterButton(Button* newButton);
-	void RemoveButton(Button* button);
+	void AddButton(Button* button);
+
+	void Update();
+
+	void Draws(RenderWindow& window);
 
 private:
-	list<Button*> buttons;
+	vector<Button*> buttons;
 
-	ButtonManager() {}
-	
-	ButtonManager(ButtonManager const&) = delete;
-	void operator=(ButtonManager const&) = delete;
+	RenderWindow* window;
 };
 
+#endif // !BUTTONMANAGER

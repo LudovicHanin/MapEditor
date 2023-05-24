@@ -1,30 +1,33 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef BUTTON
+#define BUTTON
 
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "EventManager.h"
-#include "ButtonManager.h"
+#include "Subject.h"
+#include "SFML/Graphics.hpp"
 
-using namespace std;
 using namespace sf;
 
-#endif // !BUTTON_H
-
-class Button
+class Button : public Subject<Button&>
 {
 public:
-	Button(string eventName);
-	~Button();
+	void OnButtonPressed();
+	Button();
+	Button(const Vector2f& position, const Vector2f size);
+	Button(const Vector2f& position, const Vector2f size, const Texture& texture, const IntRect& rectSize);
 
-	string GetEventName() const;
+	void SetSize(const Vector2f size);
+	void SetTexture(const Texture& texture);
+	void SetRectTexture(const IntRect& rectSize);
+	void SetOutlineThickness(const float& thickness);
+	void SetOutlineColor(const Color& color);
+	void SetColor(const Color& color);
+	void SetPosition(const Vector2f& position);
+
+	bool DoTouch(const Vector2i& position);
+
+	void Draw(RenderWindow& window);
 
 private:
-	string onButtonPressedEventName;
-
-	RectangleShape* buttonShape;
-
-	void OnButtonPressed();
-	//void OnButtonReleased();
+	RectangleShape buttonShape;
 };
+#endif // !BUTTON
 
